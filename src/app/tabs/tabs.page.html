@@ -1,18 +1,19 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1" href="/tabs/tab1">
-      <ion-icon aria-hidden="true" name="triangle"></ion-icon>
-      <ion-label>Tab 1</ion-label>
+    <ion-tab-button tab="home" [routerLink]="['/tabs/home']">
+      <img src="https://cdn.hugeicons.com/icons/home-06-stroke-rounded.svg" alt="home-06" width="24" height="24" />
+      <ion-label>Home</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab2" href="/tabs/tab2">
-      <ion-icon aria-hidden="true" name="ellipse"></ion-icon>
-      <ion-label>Tab 2</ion-label>
+    <ion-tab-button tab="links" [routerLink]="['/tabs/links']">
+      <img src="https://cdn.hugeicons.com/icons/link-01-stroke-rounded.svg" alt="link-01" width="24" height="24" />
+      <ion-label>Links</ion-label>
+
     </ion-tab-button>
 
-    <ion-tab-button tab="tab3" href="/tabs/tab3">
-      <ion-icon aria-hidden="true" name="square"></ion-icon>
-      <ion-label>Tab 3</ion-label>
+    <ion-tab-button tab="tab3" [routerLink]="['/tabs/tab3']">
+      <img src="https://cdn.hugeicons.com/icons/note-03-stroke-rounded.svg" alt="note-03" width="24" height="24" />
+      <ion-label>Notas</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
