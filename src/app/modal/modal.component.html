@@ -13,7 +13,7 @@
     <h3>Ingresa los datos</h3>
   </ion-text>
   <ion-item>
-    <ion-input labelPlacement="floating" color="primary" [(ngModel)]="link">
+    <ion-input labelPlacement="floating" color="primary" [(ngModel)]="link" >
       <div slot="label">Link</div>
     </ion-input>
   </ion-item>
@@ -22,6 +22,9 @@
     <ion-input labelPlacement="floating" color="primary" [(ngModel)]="name">
       <div slot="label">Nombre de la aplicacion <ion-text color="danger">(Required)</ion-text></div>
     </ion-input>
+    <ion-text color="danger" *ngif="name">
+      El campo es Requerido
+    </ion-text>
   </ion-item>
 
   <ion-item>
@@ -37,7 +40,11 @@
     </ion-input>
   </ion-item>
   
-
-
-
 </ion-content>
+
+<ion-toast
+  [isOpen]="isToastOpen"
+  [message]="message"
+  [duration]="5000"
+  (didDismiss)="setOpen(false)"
+></ion-toast>

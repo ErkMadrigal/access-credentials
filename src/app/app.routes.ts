@@ -9,4 +9,5 @@ export const routes: Routes = [
     path: 'detail-link',
     loadComponent: () => import('./detail-link/detail-link.component').then( m => m.DetailLinkComponent)
   },
+
 ];
