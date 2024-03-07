@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 import { IonicModule, ModalController } from '@ionic/angular';
 import { ConectionsService } from '../conections.service';
@@ -10,38 +10,41 @@ import { ConectionsService } from '../conections.service';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
   standalone: true,
-  imports: [FormsModule, IonicModule]
+  imports: [FormsModule, IonicModule, ReactiveFormsModule]
 })
 export class ModalComponent  implements OnInit {
 
-  items: any;
+  dataForm: FormGroup;
 
-  error: any[] = [];
+  items: any;
 
   isToastOpen = false;
 
   message: string = ''
-  errorName: boolean = false;
-  errorPass: boolean = false;
-  errorUser: boolean = false;
 
-  link: string = '';
-  name: string = '';
-  password: string = '';
-  username: string = '';
   
   @Input() id: number = 0;
 
-  constructor(private modalCtrl: ModalController, private conectionsService: ConectionsService) {
+  constructor(private modalCtrl: ModalController, private conectionsService: ConectionsService, private formBuilder: FormBuilder) {
+    this.dataForm = this.formBuilder.group({
+      link: [''],
+      name: ['', Validators.required],
+      password: ['', Validators.required],
+      username: ['', Validators.required],
+
+    })
   }
   
   ngOnInit() {
     if(this.id){
       this.items = this.conectionsService.getDatoLink(this.id);
-      this.link = this.items.link;
-      this.name = this.items.name;
-      this.password = this.items.password;
-      this.username = this.items.username;
+      this.dataForm = this.formBuilder.group({
+        link: [this.items.link],
+        name: [this.items.name, Validators.required],
+        password: [this.items.password, Validators.required],
+        username: [this.items.username, Validators.required],
+
+      });
     }
   }
   
@@ -54,31 +57,20 @@ export class ModalComponent  implements OnInit {
   }
 
   confirm() {
-    if(this.error.length > 0){
+    if(this.dataForm.valid){
+      return null;
+      // return this.modalCtrl.dismiss([this.link, this.name, this.password, this.username], 'confirm');
+    }else{
+      console.log(this.dataForm.value)
       this.setOpen(true);
       this.message = 'Verifica los campos';
       return null;
-    }else{
-      return this.modalCtrl.dismiss([this.link, this.name, this.password, this.username], 'confirm');
     }
   }
 
-  validate(){
-    if(this.name == ''){
-      this.error.push(1)
-      this.errorName = true;
-    }
-    if(this.password == ''){
-      this.error.push(1)
-      this.errorPass = true;
-    }
-    
-    if(this.username == ''){
-      this.errorUser = true;
-      this.error.push(1)
-    }
+  onSubmit(){
 
-    return this.error;
   }
+
 
 }
