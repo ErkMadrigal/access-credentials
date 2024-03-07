@@ -21,7 +21,6 @@ export class ModalComponent  implements OnInit {
   isToastOpen = false;
 
   message: string = ''
-
   
   @Input() id: number = 0;
 
@@ -58,18 +57,12 @@ export class ModalComponent  implements OnInit {
 
   confirm() {
     if(this.dataForm.valid){
-      return null;
-      // return this.modalCtrl.dismiss([this.link, this.name, this.password, this.username], 'confirm');
+      return this.modalCtrl.dismiss([this.dataForm.value.link, this.dataForm.value.name, this.dataForm.value.password, this.dataForm.value.username], 'confirm');
     }else{
-      console.log(this.dataForm.value)
       this.setOpen(true);
       this.message = 'Verifica los campos';
       return null;
     }
-  }
-
-  onSubmit(){
-
   }
 
 

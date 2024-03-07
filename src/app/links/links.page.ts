@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { ModalComponent } from '../modal/modal.component';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular/standalone';
 import { ConectionsService } from '../conections.service';
 
@@ -14,7 +14,7 @@ import { ConectionsService } from '../conections.service';
   templateUrl: './links.page.html',
   styleUrls: ['./links.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterLink]
+  imports: [IonicModule, CommonModule, FormsModule]
 })
 export class LinksPage implements OnInit {
 
@@ -24,7 +24,7 @@ export class LinksPage implements OnInit {
 
   isToastOpen = false;
 
-  constructor(private modalCtrl: ModalController, private alertController: AlertController, private conectionsService: ConectionsService) { 
+  constructor(private modalCtrl: ModalController, private alertController: AlertController, private conectionsService: ConectionsService, private router: Router) { 
   }
 
   ngOnInit(): void {
@@ -99,6 +99,10 @@ export class LinksPage implements OnInit {
         password: password
       };
     }
+  }
+
+  view(id: number){
+    this.router.navigate(['detail-link', id])
   }
 
 }

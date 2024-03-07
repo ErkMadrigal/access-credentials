@@ -3,31 +3,38 @@
     <ion-buttons [routerLink]="['/tabs/links']" slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Page One</ion-title>
+    <ion-title>{{items.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Pagina</ion-card-title>
-      <ion-card-subtitle>Lorem, ipsum dolor.</ion-card-subtitle>
+      <ion-card-title>{{items.name}}</ion-card-title>
+      <ion-card-subtitle>{{items.link}}</ion-card-subtitle>
     </ion-card-header>
   
     <ion-card-content>
       <ion-item>
         <ion-label>
           <h2>Usuario</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, vero. </p><br>
+          <p>{{items.username}}</p><br>
         </ion-label>
-        <ion-button slot="end" size="small">copiar</ion-button>
+        <ion-button slot="end" size="small" (click)="copy(items.username)">copiar</ion-button>
       </ion-item>
       <ion-item>
         <ion-label>
           <h2>Password</h2>
-          <p>12345678</p><br>
+          <p>{{items.password}}</p><br>
         </ion-label>
-        <ion-button slot="end" size="small">copiar</ion-button> 
+        <ion-button slot="end" size="small" (click)="copy(items.password)">copiar</ion-button> 
       </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-content>
+
+<ion-toast
+  [isOpen]="isToastOpen"
+  [message]="message"
+  [duration]="5000"
+  (didDismiss)="setOpen(false)"
+></ion-toast>
